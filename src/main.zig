@@ -23,9 +23,15 @@ const My_Rectangle = struct {
     pub fn update_player(self: *My_Rectangle) !void {
         if (rl.isKeyDown(rl.KeyboardKey.key_a)) {
             self.x -= 10;
+            if (self.x - @divFloor(self.width, 2) <= 0) {
+                self.x = 0 - @divFloor(self.width, 2);
+            }
         }
         if (rl.isKeyDown(rl.KeyboardKey.key_d)) {
             self.x += 10;
+            if (self.x + @divFloor(self.width, 2) >= 1900) {
+                self.x = 1900 - @divFloor(self.width, 2); // Prevent going beyond the right edge
+            }
         }
     }
 };
